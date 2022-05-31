@@ -1,0 +1,43 @@
+{% extends 'base/base.html' %}
+
+{% block content %}
+
+<table class="table table-bordered">
+	<thead>
+		<tr>
+			<td>ID</td>
+			<td>Name</td>
+			<td>Chunin Exam Grade</td>
+			<td>Promotion Date</td>
+		</tr>
+		
+	</thead>
+	<tbody>
+		{% if object_list %}
+		{% for object in object_list %}
+		<tr>
+			<td>{{ object.ninja_id }}</td>
+			<td>{{ object.ninja.persona.name_p }}</td>
+			<td>{{ object.chunin_exam_grade }}</td>
+			<td>{{ object.c_date }}</td>
+		</tr>
+		{% endfor %}
+		{% else %}
+		<h1>There is not chunins registers</h1>
+		{% endif %}
+	</tbody>
+</table> 
+<ul class="pager">
+	<li>
+		{% if page_obj.has_previous %}
+       	 <a href="?page={{ page_obj.previous_page_number }}">Previous</a>
+		{% endif %}
+        </li>
+	<li>
+		{% if page_obj.has_next %}
+     	 <a href="?page={{ page_obj.next_page_number }}">Next</a> 
+    	{% endif %}
+    </li>
+</ul>
+
+{% endblock%}

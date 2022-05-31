@@ -1,0 +1,65 @@
+{% extends 'base/base.html' %}
+
+{% block content %}
+
+<table class="table table-bordered">
+	<thead>
+		<tr>
+			<td>ID</td>
+			<td>Captain</td>
+			<td>Start Date</td>
+			<td>End Date</td>
+			<td>Satisfactory Result</td>
+			<td>Reward</td>
+			<td>Rank</td>
+			<td>Client</td>
+			<td>Team</td>
+			<td>Parchments</td>
+			<td>Churikens</td>
+			<td>Kunais</td>
+			<td>Explosive Seals</td>
+		</tr>
+		
+	</thead>
+	<tbody>
+		{% if object_list %}
+		{% for object in object_list %}
+		<tr>
+			<td>{{ object.id }}</td>
+			<td>{{ object.captain }}</td>
+			<td>{{ object.i_date }}</td>
+			<td>{{ object.e_date }}</td>
+			<td>{{ object.satisfactory_result }}</td>
+			<td>{{ object.reward_yens }}</td>
+			<td>{{ object.rank_m }}</td>
+			<td>{{ object.client }}</td>
+			<td>{{ object.team }}</td>
+			<td>
+				{%for p in object.parchments.all%}
+					<ul>{{ object.parchments }}</ul>
+				{% endfor %}
+			</td>
+			<td>{{ object.churikens_amount }}</td>
+			<td>{{ object.kunais_amount }}</td>
+			<td>{{ object.explosive_seals_amount }}</td>
+		</tr>
+		{% endfor %}
+		{% else %}
+		<h1>There is not missions registers</h1>
+		{% endif %}
+	</tbody>
+</table> 
+<ul class="pager">
+	<li>
+		{% if page_obj.has_previous %}
+       	 <a href="?page={{ page_obj.previous_page_number }}">Previous</a>
+		{% endif %}
+        </li>
+	<li>
+		{% if page_obj.has_next %}
+     	 <a href="?page={{ page_obj.next_page_number }}">Next</a> 
+    	{% endif %}
+    </li>
+</ul>
+
+{% endblock%}
