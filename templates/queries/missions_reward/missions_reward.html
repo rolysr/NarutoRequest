@@ -1,0 +1,61 @@
+{% extends 'base/base.html' %}
+
+{% block content %}
+
+<form name="captain_mission" method="GET" action="{% url 'village:missions_reward' %}">
+	<div clas="col-md-6 mb-3">
+		<select class="form-control" id="type" name="ordering_method">
+			<option selected="true" value="id">Order By Id (Default)</option>
+			<option value="reward_yens">Order By Reward</option>
+		</select>
+	</div>
+	<div clas="col-md-6 mb-3">
+		<select class="form-control" id="type" name="display_order">
+			<option selected="true" value="a">Ascending</option>
+			<option value="d">Descending</option>
+		</select>
+	</div>
+<div clas="col-md-6 mb-3">
+	<input type="submit" value="Filter" class="btn btn-block btn-secondary"></input>
+</div>
+
+<table class="table table-bordered">
+	<thead>
+		<tr>
+			<td>ID</td>
+			<td>Reward</td>
+			<td>Rank</td>
+		</tr>
+		
+	</thead>
+	<tbody>
+		{% if object_list %}
+		{% for object in object_list %}
+		<tr>
+			<td>{{ object.id }}</td>
+			<td>{{ object.reward_yens }}</td>
+			<td>{{ object.rank_m }}</td>
+		
+		</tr>
+		{% endfor %}
+		{% else %}
+		<h1>There is not registers</h1>
+		{% endif %}
+	</tbody>
+</table> 
+<ul class="pager">
+	<li>
+		{% if page_obj.has_previous %}
+       	 <a href="?page={{ page_obj.previous_page_number }}">Previous</a>
+		{% endif %}
+        </li>
+	<li>
+		{% if page_obj.has_next %}
+     	 <a href="?page={{ page_obj.next_page_number }}">Next</a> 
+    	{% endif %}
+    </li>
+</ul>
+
+</form>
+
+{% endblock%}

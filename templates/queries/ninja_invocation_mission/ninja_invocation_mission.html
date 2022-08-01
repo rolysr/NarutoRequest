@@ -1,0 +1,71 @@
+{% extends 'base/base.html' %}
+
+{% block content %}
+
+<form name="ninja_invocation_mission" method="GET" action="{% url 'village:ninja_invocation_mission' %}">
+	<div clas="col-md-6 mb-3">
+		<select class="form-control" id="type" name="selected_rank">
+			<option selected="true" value="all">Minimum Rank F (All)</option>
+			<option value="E">Minimum Rank E</option>
+			<option value="D">Minimum Rank D</option>
+			<option value="C">Minimum Rank C</option>
+			<option value="B">Minimum Rank B</option>
+			<option value="A">Minimum Rank A</option>
+			<option value="S">Minimum Rank S</option>
+		</select>
+	</div>
+	<div clas="col-md-6 mb-3">
+		<label class="col-form-label">Minimum number of missions</label>
+		<input name="number_missions" type="number" min="0" max="10"/>
+	</div>
+<div clas="col-md-6 mb-3">
+	<input type="submit" value="Filter" class="btn btn-block btn-secondary"></input>
+</div>
+
+<table class="table table-bordered">
+	<thead>
+		<tr>
+			<td>Ninja ID</td>
+			<td>Invocation ID</td>
+			<td>Name</td>
+			<td>Clan</td>
+			<td>Invocation</td>
+			<td>Number Missions</td>
+		</tr>
+		
+	</thead>
+	<tbody>
+		{% if object_list %}
+		{% for object in object_list %}
+		{% if object.team__members__invocations__name_i %}
+		<tr>
+			<td>{{ object.team__members__person_id }}</td>
+			<td>{{ object.team__members__invocations__id }}</td>
+			<td>{{ object.team__members__person__name_p }}</td>
+			<td>{{ object.team__members__person__clan }}</td>
+			<td>{{ object.team__members__invocations__name_i }}</td>
+			<td>{{ object.id__count }}</td>
+		</tr>
+		{% endif %}
+		{% endfor %}
+		{% else %}
+		<h1>There is not registers</h1>
+		{% endif %}
+	</tbody>
+</table> 
+<ul class="pager">
+	<li>
+		{% if page_obj.has_previous %}
+       	 <a href="?page={{ page_obj.previous_page_number }}">Previous</a>
+		{% endif %}
+        </li>
+	<li>
+		{% if page_obj.has_next %}
+     	 <a href="?page={{ page_obj.next_page_number }}">Next</a> 
+    	{% endif %}
+    </li>
+</ul>
+
+</form>
+
+{% endblock%}

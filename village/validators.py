@@ -1,15 +1,6 @@
 from django.db import models
 from django.core.exceptions import ValidationError
 
-#A validator that checks if the id from a medical_ninja _validator belongs to an id from a ninja who dominates a curative technique
-def medical_ninja_validator(id_value):
-    ninja = Ninja.objects.get(person_id=id_value)
-    techniques = ninja.techniques.all()
-    for t in techniques:
-        if CurativeTechnique.objects.filter(id=t.id):
-            return id_value
-    raise ValidationError('A medical ninja must have at least one curative technique')
-
 
 #Technique element validator
 def technique_element_validator(element):
@@ -56,8 +47,8 @@ def exam_grade_validator(grade):
 
 
 def yen_validator(yens):
-    if 0 <= yen <= 100000000:
-        return yen
+    if 0 <= yens <= 100000000:
+        return yens
     raise ValidationError('Yens must be between 0 and 100000000')
 
 
@@ -69,5 +60,5 @@ def rank_validator(rank):
 
 def amount_validator(amount):
     if 0 <= amount <= 1000:
-        return yen
+        return amount
     raise ValidationError('Amount must be between 0 and 1000')

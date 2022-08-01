@@ -1,0 +1,60 @@
+{% extends 'base/base.html' %}
+
+{% block content %}
+
+<form name="medical_mission" method="GET" action="{% url 'village:medical_mission' %}">
+	<div clas="col-md-6 mb-3">
+		<select class="form-control" id="type" name="medical_selected">
+			<option selected="true" value="all">(All)</option>
+			<option value="True">Medical Ninja</option>
+			<option value="False">Not Medical Ninja</option>
+		</select>
+	</div>
+	
+	<div clas="col-md-6 mb-3">
+		<input type="submit" value="Filter" class="btn btn-block btn-secondary"></input>
+	</div>
+
+<table class="table table-bordered">
+	<thead>
+		<tr>
+			<td>ID</td>
+			<td>Captain Name</td>
+			<td>Medical Ninja</td>
+			<td>Number Missions</td>
+		</tr>
+		
+	</thead>
+	<tbody>
+		{% if object_list %}
+		{% for object in object_list %}
+		{% if values.medical_selected == object.is_medical_ninja or  values.medical_selected == "all" %}
+		<tr>
+			<td>{{ object.captain__ninja_id }}</td>
+			<td>{{ object.captain__ninja__person__name_p }}</td>
+			<td>{{ object.is_medical_ninja }}</td>
+			<td>{{ object.id__count }}</td>
+		</tr>
+		{% endif%}
+		{% endfor %}
+		{% else %}
+		<h1>There is not registers</h1>
+		{% endif %}
+	</tbody>
+</table> 
+<ul class="pager">
+	<li>
+		{% if page_obj.has_previous %}
+       	 <a href="?page={{ page_obj.previous_page_number }}">Previous</a>
+		{% endif %}
+        </li>
+	<li>
+		{% if page_obj.has_next %}
+     	 <a href="?page={{ page_obj.next_page_number }}">Next</a> 
+    	{% endif %}
+    </li>
+</ul>
+
+</form>
+
+{% endblock%}

@@ -1,0 +1,65 @@
+{% extends 'base/base.html' %}
+
+{% block content %}
+
+<form name="technique_mission" method="GET" action="{% url 'village:technique_mission' %}">
+	<div clas="col-md-6 mb-3">
+		<select class="form-control" id="type" name="is_hidden_selected">
+			<option selected="true" value="all">(All)</option>
+			<option value="True">Hidden</option>
+			<option value="False">Not Hidden</option>
+		</select>
+	</div>
+	
+<div clas="col-md-6 mb-3">
+	<input type="submit" value="Filter" class="btn btn-block btn-secondary"></input>
+</div>
+
+<table class="table table-bordered">
+	<thead>
+		<tr>
+			<td>ID</td>
+			<td>Technique</td>
+			<td>Is Hidden</td>
+			<td>Countries Exposed</td>
+			<td>Number Mission</td>
+		</tr>
+	</thead>
+	<tbody>
+		{% if object_list %}
+		{% for object in object_list %}
+		{% if values.is_hidden_selected == "True" and object.team__members__techniques__is_hidden or values.is_hidden_selected == "False" and not object.team__members__techniques__is_hidden or  values.is_hidden_selected == "all" %}
+		<tr>
+			<td>{{ object.team__members__techniques__id }}</td>
+			<td>{{ object.team__members__techniques__name }}</td>
+			<td>{{ object.team__members__techniques__is_hidden }}</td>
+			<td>
+			{% for c in object.countries %}
+				<ul>{{ c }}</ul>
+			{% endfor %}
+			</td>
+			<td>{{ object.id__count }}</td>
+		</tr>
+		{% endif %}
+		{% endfor %}
+		{% else %}
+		<h1>There is not registers</h1>
+		{% endif %}
+	</tbody>
+</table> 
+<ul class="pager">
+	<li>
+		{% if page_obj.has_previous %}
+       	 <a href="?page={{ page_obj.previous_page_number }}">Previous</a>
+		{% endif %}
+        </li>
+	<li>
+		{% if page_obj.has_next %}
+     	 <a href="?page={{ page_obj.next_page_number }}">Next</a> 
+    	{% endif %}
+    </li>
+</ul>
+
+</form>
+
+{% endblock%}

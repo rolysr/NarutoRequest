@@ -2,13 +2,26 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-	<meta charset="UTF-8">
 
+	<style>
+		#main-footer{
+			position: fixed;
+			padding: 10px 10px 0px 10px;
+			bottom: 0%;
+			width: 90%;
+			height: 40px;
+		}
+	</style>
+
+	<meta charset="UTF-8">
+	<meta charset="UTF-8">
+ 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+  	<meta http-equiv="X-UA-Compatible" content="ie=edge">
 	{% block extrastatic %}
 	{% endblock %}
 
 	<link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
-	<title>{% block title %}Document {% endblock %}</title>
+	<title>{% block title %}Naruto Request {% endblock %}</title>
 </head>
 <body>
 <div class="container">
@@ -20,6 +33,9 @@
 		            <div class="bs-component">
 		            	<nav class="navbar navbar-default">
 		                	<div class="container-fluid">
+								<div class="navbar-header">
+		                    		<a class="navbar-brand" href="{% url 'village:home' %}">Home</a>
+		                  		</div>
 		                  	<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 		                    	<ul class="nav navbar-nav">
 		                      		<li class="dropdown">
@@ -34,7 +50,7 @@
 											<li><a href="{% url 'village:ninja' %}">Ninja</a></li>
 											<li><a href="{% url 'village:medical' %}">Medical Ninja</a></li>
 											<li><a href="{% url 'village:genin' %}">Genin</a></li>
-											<li><a href="{% url 'village:chunin' %}">Chounin</a></li>
+											<li><a href="{% url 'village:chunin' %}">Chunin</a></li>
 											<li><a href="{% url 'village:jounin' %}">Jounin</a></li>
 			                        	</ul>
 									</li>
@@ -61,6 +77,17 @@
 											<li><a href="{% url 'village:invocation' %}">Invocation</a></li>
 				                        </ul>
 									</li>
+									<li class="dropdown">
+		                        		<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Relevant Queries <span class="caret"></span></a>
+				                        <ul class="dropdown-menu" role="menu">
+				                        	<li><a href="{% url 'village:medical_gender' %}">Medical Ninjas - Gender</a></li>
+											<li><a href="{% url 'village:captain_mission' %}">Captains - Missions</a></li>
+											<li><a href="{% url 'village:ninja_invocation_mission' %}">Ninjas - Invocations - Missions</a></li>
+											<li><a href="{% url 'village:technique_mission' %}">Techniques - Missions</a></li>
+											<li><a href="{% url 'village:medical_mission' %}">Medical - Captains</a></li>
+											<li><a href="{% url 'village:missions_reward' %}">Missions - Rewards</a></li>
+				                        </ul>
+									</li>
 		                    	</ul>
 		                    	<ul class="nav navbar-nav navbar-right">
 		                        	<li class="dropdown"><a href="http://github.com/rolysr" onclick="pageTracker._link(this.href); return false;">Developer</a>
@@ -69,6 +96,7 @@
 		                        		<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Settings<span class="caret"></span></a>
 		                        		<ul class="dropdown-menu" role="menu">
 		                          			<li><a href="/admin/">Go to Admin</a></li>
+											<li><a href="/accounts/register/">Go to Admin Registration</a></li>
 		                        		</ul>
 		                      		</li>
 		                    	</ul>
@@ -78,7 +106,7 @@
 		        </div>
            	</div>
         </div>
-    </div>    
+    </div>  
 
 	{% endblock %}
 
@@ -89,14 +117,23 @@
 
 
 	{% block footer %}
+	<footer id="main-footer" class="py-4 bg-primary text-white text-center">
+		Copyright &copy;
+		<span class="year"></span> TEAM 4 2022
+	</footer>
 	{% endblock%}
+	
+
 </div>
 	<script src="{% static 'js/jquery-1.10.2.min.js' %}"></script>
 	<script src="{% static 'js/bootstrap.min.js' %}"></script>
+	<script src="{% static 'js/jquery-3.3.1.min.js' %} "></script>
+  	<script src="{% static 'js/bootstrap.bundle.min.js' %} "></script>
+  	<script src="{% static 'js/lightbox.min.js' %} "></script>
+  	<script src="{% static 'js/main.js' %} "></script>
 
 	{% block extrajs %}
 	{% endblock %}
-
 
 </body>
 </html>

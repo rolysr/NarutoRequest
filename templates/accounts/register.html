@@ -1,0 +1,74 @@
+{% extends 'base/base.html' %}
+
+{% block content %}
+<form method="post">
+	{% csrf_token %}
+	
+	<div class="row">
+		<div class="col-md-8 col-md-offset-2">
+			<div class="form-group">
+				<label>Name</label>
+				<input class="form-control" type="text" name="first_name">
+			</div>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-8 col-md-offset-2">
+			<div class="form-group">
+				<label >Last Name</label>
+				<input class="form-control" type="text" name="last_name">
+			</div>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-8 col-md-offset-2">
+			<div class="form-group">
+				<label >Username</label>
+				<input class="form-control" type="text" name="username">
+			</div>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-8 col-md-offset-2">
+			<div class="form-group">
+				<label >E-Mail</label>
+				<input class="form-control" type="text" name="email">
+			</div>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-8 col-md-offset-2">
+			<div class="form-group">
+				<label >Password</label>
+				<input class="form-control" type="password" name="password1">
+			</div>
+			<ul>
+				<p>-Password can not be to similar to the given information</p>
+				<p>-Password should be at leat 8 characters long</p>
+				<p>-Password can not be a commonly used password</p>
+				<p>-Password can not be completely numerical</p>
+			</ul>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-8 col-md-offset-2">
+			<div class="form-group">
+				<label >Confirm Password</label>
+				<input class="form-control" type="password" name="password2">
+			</div>
+		</div>
+	</div>
+	
+	<div class="row">
+		<div class="col-md-8 col-md-offset-2">
+			<div class="form-group">
+				<button class="btn btn-primary "type="submit">Submit Admin Proposal</button>
+			</div>
+		</div>
+		<div>
+			<p class="text-center">If you have an account, <a href="/admin/">Go Admin Site</a>.</p>
+		</div>
+	</div>
+	
+</form>
+{% endblock %}

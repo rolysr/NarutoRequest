@@ -1,0 +1,69 @@
+{% extends 'base/base.html' %}
+
+{% block content %}
+
+<form name="medical_gender" method="GET" action="{% url 'village:medical_gender' %}">
+<div clas="col-md-6 mb-3">
+	<select class="form-control" id="type" name="gender_selected">
+		<option selected="true" value="all">Gender (All)</option>
+		<option value="M">Male</option>
+		<option value="F">Female</option>
+	</select>
+</div>
+
+<div clas="col-md-6 mb-3">
+	<input type="submit" value="Filter" class="btn btn-block btn-secondary"></input>
+</div>
+
+<div>
+	<div>
+		Women Percent: <a>{{women_percent}}</a>
+	</div>
+	<div>
+		Men Percent: <a>{{men_percent}}</a>
+	</div>
+</div>
+
+<table class="table table-bordered">
+	<thead>
+		<tr>
+			<td>ID</td>
+			<td>Name</td>
+			<td>Sex</td>
+		</tr>
+		
+	</thead>
+	<tbody>
+		{% if object_list %}
+		{% for object in object_list %}
+		{% if values.gender_selected == object.ninja.person.gender or  values.gender_selected == "all" %}
+		<tr>
+			<td>{{ object.ninja_id }}</td>
+			<td>{{ object.ninja.person.name_p }}</td>
+			<td>
+				{{ object.ninja.person.gender }}
+			</td>
+		</tr>
+		{% endif%}
+		{% endfor %}
+		{% else %}
+		<h1>There is not registers</h1>
+		{% endif %}
+	</tbody>
+</table> 
+<ul class="pager">
+	<li>
+		{% if page_obj.has_previous %}
+       	 <a href="?page={{ page_obj.previous_page_number }}">Previous</a>
+		{% endif %}
+        </li>
+	<li>
+		{% if page_obj.has_next %}
+     	 <a href="?page={{ page_obj.next_page_number }}">Next</a> 
+    	{% endif %}
+    </li>
+</ul>
+
+</form>
+
+{% endblock %}
