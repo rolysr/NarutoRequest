@@ -7,6 +7,6 @@ Web App using Django Framework and basic CRUD with Sqlite database
  - django_extensions
 
 # Command to run the app
-´´´bash
+```bash
 $ python3 manage.py runserver
-´´´
+```
